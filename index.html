@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DMED</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+
+    <style>
+      body {
+        font-family: sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: start;
+        height: 100vh;
+        margin: 0;
+        padding: 40px 180px;
+        background: #fff;
+      }
+
+      .header {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo_dmd {
+        width: 26%;
+      }
+
+      .pin-box {
+        display: flex;
+        gap: 10px;
+        margin: 20px 0 6px;
+      }
+
+      .pin-box input {
+        width: 48px;
+        height: 32px;
+        border: 1px solid rgba(128, 128, 128, 0.399);
+        border-radius: 8px;
+        text-align: center;
+        font-size: 18px;
+        transition: border 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      .pin-box input:focus {
+        border: 1px solid #007bff;
+        box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+        outline: none;
+      }
+
+      .pin-box input.error {
+        border: 1px solid red;
+        color: red;
+        box-shadow: none !important;
+      }
+
+      button {
+        padding: 8px 90px;
+        font-size: 16px;
+        background: #b6b6b625;
+        border: 1px solid rgba(128, 128, 128, 0.248);
+        border-radius: 8px;
+        cursor: not-allowed;
+      }
+
+      button.active {
+        background: #007bff;
+        color: white;
+        cursor: pointer;
+      }
+
+      .language-switcher {
+        position: relative;
+        display: inline-block;
+        font-family: sans-serif;
+      }
+
+      .dropdown-toggle {
+        width: 139px;
+        height: 40px;
+        padding: 8px 17px;
+        border-radius: 20px;
+        border: 1px solid #ccc;
+        background: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+        cursor: pointer;
+      }
+
+      .dropdown-toggle img {
+        width: 28px;
+        height: 20px;
+        border: 1px rgba(133, 133, 133, 0.268) solid;
+        border-radius: 5px;
+      }
+
+      .dropdown-menu {
+        position: absolute;
+        right: 0;
+        margin-top: 0px;
+        padding: 5px 0;
+        background: white;
+        border-radius: 10px;
+        width: 139px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.195);
+        z-index: 1000;
+
+        opacity: 0;
+        transform: translateY(-10px);
+        pointer-events: none;
+        transition: opacity 0.25s ease, transform 0.25s ease;
+      }
+
+      .language-switcher.open .dropdown-menu {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+      }
+
+      .dropdown-toggle:hover {
+        border: #409fff 1px solid;
+        color: #409fff;
+        transition: 100ms ease;
+      }
+
+      .dropdown-menu li {
+        list-style: none;
+        padding: 8px 15px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        cursor: pointer;
+      }
+
+      .dropdown-menu li:hover {
+        background: #f0f0f0;
+      }
+
+      .dropdown-menu li img {
+        width: 28px;
+        height: 20px;
+        border: 1px rgba(133, 133, 133, 0.268) solid;
+        border-radius: 5px;
+      }
+
+      h2 {
+        width: 35%;
+        font-size: 1.7rem;
+        text-align: center;
+      }
+
+      .imggg {
+        width: 40%;
+      }
+
+      @media (max-width: 600px) {
+        body {
+          padding: 20px 24px;
+        }
+
+        .logo_dmd {
+          width: 50%;
+        }
+
+        .lang_txt {
+          display: none;
+        }
+
+        .dropdown-toggle {
+          width: 50px;
+          height: 50px;
+          border-radius: 50%;
+          padding: 6px 12px;
+          font-size: 14px;
+        }
+
+        h2 {
+          font-size: 1.2rem;
+          width: 100%;
+          text-align: center;
+        }
+
+        .pin-box {
+          justify-content: center;
+          gap: 8px;
+        }
+
+        .pin-box input {
+          width: 44px;
+          height: 44px;
+          font-size: 20px;
+        }
+
+        button {
+          width: 100%;
+          padding: 12px 0;
+          font-size: 16px;
+        }
+
+        .imggg {
+          width: 100%;
+          margin-top: 20px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <img class="logo_dmd" src="./logo_dmd.png" alt="logo" />
+      <div class="language-switcher">
+        <button class="dropdown-toggle">
+          <img src="flags/ru.png" alt="Русский" /><span class="lang_txt"
+            >Русский</span
+          >
+        </button>
+        <ul class="dropdown-menu">
+          <li data-lang="ru">
+            <img src="flags/ru.png" alt="Русский" /> Русский
+          </li>
+          <li data-lang="uz">
+            <img src="flags/uz.png" alt="O‘zbekcha" /> O‘zbekcha
+          </li>
+          <li data-lang="en">
+            <img src="flags/gb.png" alt="English" /> English
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <br /><br /><br />
+
+    <h2 id="heading-text">Введите PIN-код для просмотра документа</h2>
+
+    <div>
+      <div class="pin-box">
+        <input maxlength="1" />
+        <input maxlength="1" />
+        <input maxlength="1" />
+        <input maxlength="1" />
+      </div>
+
+      <div
+        id="error-msg"
+        style="color: red; font-size: 14px; height: 20px"
+      ></div>
+    </div>
+
+    <br /><br />
+
+    <button id="openBtn" disabled>Открыть</button>
+
+    <br /><br /><br /><br /><br />
+
+    <img class="imggg" src="imggg.png" alt="imggg" />
+
+    <script>
+      const translations = {
+        ru: {
+          heading: "Введите PIN-код для просмотра документа",
+          open: "Открыть",
+          checking: "Проверка...",
+          error: "Неверный PIN-код",
+        },
+        uz: {
+          heading: "Hujjatni ko‘rish uchun PIN-kodni kiriting",
+          open: "Ochish",
+          checking: "Tekshirilmoqda...",
+          error: "Noto‘g‘ri PIN-kod",
+        },
+        en: {
+          heading: "Enter the PIN to view the document",
+          open: "Open",
+          checking: "Checking...",
+          error: "Incorrect PIN code",
+        },
+      };
+
+      let currentLang = "ru";
+
+      function updateLanguage(lang) {
+        currentLang = lang;
+        const t = translations[lang];
+        document.getElementById("heading-text").textContent = t.heading;
+        document.getElementById("openBtn").textContent = t.open;
+        document.getElementById("error-msg").textContent = "";
+      }
+
+      const inputs = document.querySelectorAll(".pin-box input");
+      const button = document.getElementById("openBtn");
+
+      inputs.forEach((input, idx) => {
+        input.addEventListener("input", () => {
+          if (input.value && idx < inputs.length - 1) {
+            inputs[idx + 1].focus();
+          }
+          checkPIN();
+        });
+
+        input.addEventListener("keydown", (e) => {
+          if (e.key === "Backspace" && !input.value && idx > 0) {
+            inputs[idx - 1].focus();
+          }
+        });
+      });
+
+      const toggle = document.querySelector(".dropdown-toggle");
+      const switcher = document.querySelector(".language-switcher");
+
+      toggle.addEventListener("click", (e) => {
+        e.stopPropagation();
+        switcher.classList.toggle("open");
+      });
+
+      document.addEventListener("click", (e) => {
+        if (!e.target.closest(".language-switcher")) {
+          switcher.classList.remove("open");
+        }
+      });
+
+      document.querySelectorAll(".dropdown-menu li").forEach((item) => {
+        item.addEventListener("click", () => {
+          const selectedLang = item.getAttribute("data-lang");
+          const selectedText = item.textContent.trim();
+          const selectedFlag = item.querySelector("img").src;
+
+          toggle.innerHTML = `<img src="${selectedFlag}" /><span class="lang_txt">${selectedText}</span>`;
+          switcher.classList.remove("open");
+
+          updateLanguage(selectedLang);
+        });
+      });
+
+      function checkPIN() {
+        const pin = Array.from(inputs)
+          .map((input) => input.value)
+          .join("");
+        const filled = pin.length === 4;
+        const btn = document.getElementById("openBtn");
+        const errorMsg = document.getElementById("error-msg");
+
+        if (filled) {
+          btn.textContent = translations[currentLang].checking;
+          btn.disabled = true;
+          btn.classList.remove("active");
+
+          setTimeout(() => {
+            if (pin === "2817") {
+              window.location.href = "./docs.dmed.uz/el-docs/doc.html";
+            } else {
+              errorMsg.textContent = translations[currentLang].error;
+              inputs.forEach((input) => input.classList.add("error"));
+              btn.textContent = translations[currentLang].open;
+              btn.disabled = true;
+              btn.classList.remove("active");
+
+              setTimeout(() => {
+                inputs.forEach((input) => {
+                  input.value = "";
+                  input.classList.remove("error");
+                });
+                errorMsg.textContent = "";
+                inputs[0].focus();
+              }, 1500);
+            }
+          }, 1500);
+        } else {
+          btn.classList.remove("active");
+          btn.disabled = true;
+          errorMsg.textContent = "";
+          inputs.forEach((input) => input.classList.remove("error"));
+        }
+      }
+    </script>
+  </body>
+</html>
